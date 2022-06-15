@@ -2,8 +2,8 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     let result;
-    if(input.match(/[\d]+.?[\d]*\/?[\d]*.?[\d]*/)){
-    result=input.match(/[\d]+.?[\d]*\/?[\d]*.?[\d]*/)[0];
+    if(input.match(/[-]?[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/)){
+    result=input.match(/[-]?[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/)[0];
     console.log(result)
     if(result.includes("/")){
       let segments=result.split("/");
@@ -74,14 +74,33 @@ function ConvertHandler() {
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
     let result;
-    
-    return result;
+    switch (initUnit) {
+
+      case "gal":
+        result=initNum*galToL;
+        return result;
+      case "L":
+        result=initNum/galToL;
+        return result;
+      case "mi":
+        result=initNum*miToKm;
+        return result;
+      case "km":
+        result=initNum/miToKm;
+        return result;
+      case "lbs":
+        result=initNum/lbsToKg;
+        return result;
+      case "kg":
+        result=initNum*lbsToKg;
+        return result;
+      default:
+        return new Error("invalid unit")
+    }
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    let result;
-    
-    return result;
+    return `${initNum} ${initUnit} is equal to ${returnNum} ${returnUnit}.`
   };
   
 }

@@ -7,8 +7,8 @@ let convertHandler = new ConvertHandler();
 suite('Unit Tests', function(){
   describe("numbers handlers",function(){
     it(("should read a whole number"),function(){
-      let param = "mil25";
-      assert.equal(convertHandler.getNum(param),25)
+      let param = "10L";
+      assert.equal(convertHandler.getNum(param),10)
     })
     it("should read decimal numbers",function(){
       let param = "25.5"
@@ -58,6 +58,10 @@ suite('Unit Tests', function(){
       assert.equal(convertHandler.spellOutUnit("kg"),"Kilogram")
       assert.equal(convertHandler.spellOutUnit("lbs"),"Pound")
       assert.equal(convertHandler.spellOutUnit("mi"),"Mile")
+    })
+    it("should convert a value to the related aim value",function(){
+      assert.equal(convertHandler.convert(10,"L"),2.6417217685798895);
+      assert.equal(convertHandler.convert(2.6417217685798895,"gal"),10);
     })
   })
 });
