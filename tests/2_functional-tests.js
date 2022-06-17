@@ -4,7 +4,7 @@ const server = require('../server');
 chai.use(chaiHttp);
 
 
-suite('Functional Tests', function() {
+describe('Functional Tests', function() {
     it("should convert a valid input:GET:api/convert",function(done){
         chai.request(server).get("/api/convert").type("form").send({input:"10L"})
         .end((err,res)=>{
