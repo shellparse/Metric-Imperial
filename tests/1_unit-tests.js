@@ -42,6 +42,7 @@ suite('Unit Tests', function(){
     })
     it("should return error on invalid input unit",function(){
       assert.instanceOf(convertHandler.getUnit("5lb"),Error);
+      assert.instanceOf(convertHandler.getReturnUnit("32g"),Error);
     })
     it("should return the right return unit",function(){
       assert.equal(convertHandler.getReturnUnit("gal"),"L");

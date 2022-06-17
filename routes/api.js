@@ -10,12 +10,19 @@ module.exports = function (app) {
 
   app.get("/api/convert",(req,res)=>{
     let unit=convertHandler.getUnit(req.body.input);
-    console.log("unit ",unit);
     let value=convertHandler.getNum(req.body.input);
-    console.log("value "+value)
     let result=convertHandler.convert(value,unit);
-    console.log("result "+result);
-    res.json({result:convertHandler.getString(value,convertHandler.spellOutUnit(unit),result,convertHandler.spellOutUnit(convertHandler.getReturnUnit(unit)))});
+    if(typeof unit==="string"&&typeof value ==="number"){
+      res.json({result:convertHandler.getString(value,convertHandler.spellOutUnit(unit),result,convertHandler.spellOutUnit(convertHandler.getReturnUnit(unit)))});
+    }else if(unit instanceof Error&&value instanceof Error){
+      res.json({result:"invalid number and unit"})
+    }else if(unit instanceof Error){
+      res.json({result:unit.message})
+    }else if(value instanceof Error){
+      res.json({result:value.message})
+    }else{
+      res.json({result:"something went wrong check your inputs"})
+    }
   })
 
 };

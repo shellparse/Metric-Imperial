@@ -4,15 +4,14 @@ function ConvertHandler() {
     let result;
     if(input.match(/[-]?[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/)){
     result=input.match(/[-]?[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/)[0];
-    console.log(result)
     if(result.includes("/")){
       let segments=result.split("/");
       if(segments.length>2){
-        return new Error("double-fraction")
+        return new Error("invalid number")
       }
       result=segments[0]/segments[1]
     }
-    return result;
+    return parseFloat(result);
   }else{
     return 1;
   }
@@ -25,7 +24,7 @@ function ConvertHandler() {
       result=input.match(/gal|L|mi|km|lbs|kg/)[0]
       return result;
     }else{
-      return new Error("invalid input unit")
+      return new Error("invalid unit")
     }
   }
   
