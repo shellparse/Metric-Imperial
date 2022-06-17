@@ -12,6 +12,9 @@ module.exports = function (app) {
     let unit=convertHandler.getUnit(req.body.input);
     let value=convertHandler.getNum(req.body.input);
     let result=convertHandler.convert(value,unit);
+    if(typeof result==="number"){
+      result=result.toFixed(6);
+    }
     if(typeof unit==="string"&&typeof value ==="number"){
       res.json({result:convertHandler.getString(value,convertHandler.spellOutUnit(unit),result,convertHandler.spellOutUnit(convertHandler.getReturnUnit(unit)))});
     }else if(unit instanceof Error&&value instanceof Error){

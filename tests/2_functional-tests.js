@@ -11,7 +11,7 @@ describe('Functional Tests', function() {
             let resObj=JSON.parse(res.text)
             var should = require('chai').should();
             should.not.exist(err);
-            resObj.result.should.be.equal("10 Liter is equal to 2.6417217685798895 Gallon.");
+            resObj.result.should.be.equal("10 Liter is equal to 2.641722 Gallon.");
             done();
         })
     })
