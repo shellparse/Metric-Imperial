@@ -9,22 +9,22 @@ module.exports = function (app) {
   let convertHandler = new ConvertHandler();
 
   app.get("/api/convert",(req,res)=>{
-    let unit=convertHandler.getUnit(req.body.input);
-    let value=convertHandler.getNum(req.body.input);
+    let unit=convertHandler.getUnit(req.query.input);
+    let value=convertHandler.getNum(req.query.input);
     let result=convertHandler.convert(value,unit);
     if(typeof result==="number"){
-      result=result.toFixed(6);
+      result=result.toFixed(5);
     }
     if(typeof unit==="string"&&typeof value ==="number"){
-      res.json({result:convertHandler.getString(value,convertHandler.spellOutUnit(unit),result,convertHandler.spellOutUnit(convertHandler.getReturnUnit(unit)))});
+      res.json({string:convertHandler.getString(value,convertHandler.spellOutUnit(unit),result,convertHandler.spellOutUnit(convertHandler.getReturnUnit(unit)))});
     }else if(unit instanceof Error&&value instanceof Error){
-      res.json({result:"invalid number and unit"})
+      res.json({string:"invalid number and unit"})
     }else if(unit instanceof Error){
-      res.json({result:unit.message})
+      res.json({string:unit.message})
     }else if(value instanceof Error){
-      res.json({result:value.message})
+      res.json({string:value.message})
     }else{
-      res.json({result:"something went wrong check your inputs"})
+      res.json({string:"something went wrong check your inputs"})
     }
   })
 
