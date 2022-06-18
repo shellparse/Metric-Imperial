@@ -51,17 +51,17 @@ function ConvertHandler() {
   this.spellOutUnit = function(unit) {
     switch (unit) {
       case "gal":
-        return "Gallon";
+        return "gallons";
       case "L":
-        return "Liter";
+        return "liters";
       case "mi":
-        return "Mile";
+        return "miles";
       case "km":
-        return "Kilometer";
+        return "kilometers";
       case "lbs":
-        return "Pound";
+        return "pounds";
       case "kg":
-        return "Kilogram";
+        return "kilograms";
     
       default:
         return new Error("invalid unit")
@@ -99,7 +99,7 @@ function ConvertHandler() {
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    return `${initNum} ${initUnit} is equal to ${returnNum} ${returnUnit}.`
+    return `${initNum} ${initUnit} converts to ${returnNum} ${returnUnit}`
   };
   
 }

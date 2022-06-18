@@ -16,7 +16,7 @@ module.exports = function (app) {
       result=result.toFixed(5);
     }
     if(typeof unit==="string"&&typeof value ==="number"){
-      res.json({string:convertHandler.getString(value,convertHandler.spellOutUnit(unit),result,convertHandler.spellOutUnit(convertHandler.getReturnUnit(unit)))});
+      res.json({initNum:value,initUnit:unit,returnNum:result,returnUnit:convertHandler.getReturnUnit(unit),string:convertHandler.getString(value,convertHandler.spellOutUnit(unit),result,convertHandler.spellOutUnit(convertHandler.getReturnUnit(unit)))});
     }else if(unit instanceof Error&&value instanceof Error){
       res.json({string:"invalid number and unit"})
     }else if(unit instanceof Error){
