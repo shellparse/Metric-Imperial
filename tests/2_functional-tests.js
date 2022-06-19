@@ -51,7 +51,7 @@ suite('Functional Tests', function() {
             var should=require('chai').should();
             should.not.exist(err);
             let resObj=JSON.parse(res.text);
-            resObj.string.should.be.equal("1 kilograms converts to 0.45359 pounds");
+            resObj.string.should.be.equal("1 kilograms converts to 2.20462 pounds");
             done();
         })
     })

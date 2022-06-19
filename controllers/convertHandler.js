@@ -2,8 +2,14 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     let result;
-    if(input.match(/[-]?[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/)){
-    result=input.match(/[-]?[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/)[0];
+    let indexOfLetter;
+    let indexOfLetterLast;
+    if(input.match(/[a-zA-Z]+/)){
+      result=input.replace(input.match(/[a-zA-Z]+/),"");
+    }
+
+    if(input.match(/(\d+(?! *\/))? *-? *(?:(\d+) *\/ *(\d+))?.*$/)){
+    result=input.match(/(\d+(?! *\/))? *-? *(?:(\d+) *\/ *(\d+))?.*$/)[0];
     if(result.includes("/")){
       let segments=result.split("/");
       if(segments.length>2){
@@ -19,9 +25,10 @@ function ConvertHandler() {
   
   this.getUnit = function(input) {
     let result;
-    if(input.match(/gal|L|mi|km|lbs|kg/))
+    if(input.match(/gal|L$|^L|mi$|km|lbs|kg/i))
     {
-      result=input.match(/gal|L|mi|km|lbs|kg/)[0]
+      result=input.match(/gal|L$|^L|mi$|km|lbs|kg/i)[0]
+      if(result==="l")return "L"
       return result;
     }else{
       return new Error("invalid unit")
@@ -88,10 +95,10 @@ function ConvertHandler() {
         result=initNum/miToKm;
         return result;
       case "lbs":
-        result=initNum/lbsToKg;
+        result=initNum*lbsToKg;
         return result;
       case "kg":
-        result=initNum*lbsToKg;
+        result=initNum/lbsToKg;
         return result;
       default:
         return new Error("invalid unit")
