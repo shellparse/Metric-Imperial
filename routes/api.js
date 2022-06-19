@@ -16,15 +16,15 @@ module.exports = function (app) {
       result=result.toFixed(5);
     }
     if(typeof unit==="string"&&typeof value ==="number"){
-      res.json({initNum:value,initUnit:unit,returnNum:result,returnUnit:convertHandler.getReturnUnit(unit),string:convertHandler.getString(value,convertHandler.spellOutUnit(unit),result,convertHandler.spellOutUnit(convertHandler.getReturnUnit(unit)))});
+      res.send({initNum:value,initUnit:unit,returnNum:result,returnUnit:convertHandler.getReturnUnit(unit),string:convertHandler.getString(value,convertHandler.spellOutUnit(unit),result,convertHandler.spellOutUnit(convertHandler.getReturnUnit(unit)))});
     }else if(unit instanceof Error&&value instanceof Error){
-      res.json({string:"invalid number and unit"})
+      res.send({string:"invalid number and unit"})
     }else if(unit instanceof Error){
-      res.json({string:unit.message})
+      res.send({string:unit.message})
     }else if(value instanceof Error){
-      res.json({string:value.message})
+      res.send({string:value.message})
     }else{
-      res.json({string:"something went wrong check your inputs"})
+      res.send({string:"something went wrong check your inputs"})
     }
   })
 
