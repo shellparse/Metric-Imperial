@@ -4,8 +4,7 @@ const ConvertHandler = require('../controllers/convertHandler.js');
 
 let convertHandler = new ConvertHandler();
 
-describe('Unit Tests', function(){
-  describe("numbers tests",function(){
+suite('Unit Tests', function(){
     it(("should read a whole number input"),function(){
       let param = "10";
       assert.equal(convertHandler.getNum(param),10)
@@ -30,9 +29,6 @@ describe('Unit Tests', function(){
       let param = "mido"
       assert.equal(convertHandler.getNum(param),1)
     })
-  })
-  describe("units testing",function(){
-
     it("should return the right input unit",function(){
       let value = ["gal","L","mi","km","lbs","kg"];
       assert.include(value,convertHandler.getUnit("100gal"));
@@ -46,12 +42,12 @@ describe('Unit Tests', function(){
       assert.instanceOf(convertHandler.getReturnUnit("32g"),Error);
     })
     it("should spell out the right unit",function(){
-      assert.equal(convertHandler.spellOutUnit("gal"),"Gallon");
-      assert.equal(convertHandler.spellOutUnit("L"),"Liter");
-      assert.equal(convertHandler.spellOutUnit("km"),"Kilometer");
-      assert.equal(convertHandler.spellOutUnit("kg"),"Kilogram");
-      assert.equal(convertHandler.spellOutUnit("lbs"),"Pound");
-      assert.equal(convertHandler.spellOutUnit("mi"),"Mile");
+      assert.equal(convertHandler.spellOutUnit("gal"),"gallons");
+      assert.equal(convertHandler.spellOutUnit("L"),"liters");
+      assert.equal(convertHandler.spellOutUnit("km"),"kilometers");
+      assert.equal(convertHandler.spellOutUnit("kg"),"kilograms");
+      assert.equal(convertHandler.spellOutUnit("lbs"),"pounds");
+      assert.equal(convertHandler.spellOutUnit("mi"),"miles");
     })
     it("should convert gal to L",function(){
       assert.equal(convertHandler.getReturnUnit("gal"),"L");
@@ -71,9 +67,8 @@ describe('Unit Tests', function(){
     it("should convert kg to lbs",function(){
       assert.equal(convertHandler.getReturnUnit("kg"),"lbs");
     })
-  })
     it("should convert a value to the related aim value",function(){
       assert.equal(convertHandler.convert(10,"L"),2.6417217685798895);
       assert.equal(convertHandler.convert(2.6417217685798895,"gal"),10);
-    })
+    });
   });

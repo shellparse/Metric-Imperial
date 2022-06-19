@@ -4,14 +4,14 @@ const server = require('../server');
 chai.use(chaiHttp);
 
 
-describe('Functional Tests', function() {
+suite('Functional Tests', function() {
     it("should convert a valid input:GET:api/convert",function(done){
         chai.request(server).get("/api/convert?input=10L")
         .end((err,res)=>{
             let resObj=JSON.parse(res.text)
             var should = require('chai').should();
             should.not.exist(err);
-            resObj.string.should.be.equal("10 Liter is equal to 2.64172 Gallon.");
+            resObj.string.should.be.equal("10 liters converts to 2.64172 gallons");
             done();
         })
     })
@@ -51,7 +51,7 @@ describe('Functional Tests', function() {
             var should=require('chai').should();
             should.not.exist(err);
             let resObj=JSON.parse(res.text);
-            resObj.string.should.be.equal("1 Kilogram is equal to 0.45359 Pound.");
+            resObj.string.should.be.equal("1 kilograms converts to 0.45359 pounds");
             done();
         })
     })
