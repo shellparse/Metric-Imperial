@@ -5,7 +5,7 @@ chai.use(chaiHttp);
 
 
 suite('Functional Tests', function() {
-    it("should convert a valid input:GET:api/convert",function(done){
+    test("should convert a valid input:GET:api/convert",function(done){
         chai.request(server).get("/api/convert?input=10L")
         .end((err,res)=>{
             let resObj=JSON.parse(res.text)
@@ -15,7 +15,7 @@ suite('Functional Tests', function() {
             done();
         })
     })
-    it("should convert an invalid unit and send invalid unit response",function(done){
+    test("should convert an invalid unit and send invalid unit response",function(done){
         chai.request(server).get("/api/convert?input=32g")
         .end((err,res)=>{
             let resObj=JSON.parse(res.text);
@@ -25,7 +25,7 @@ suite('Functional Tests', function() {
             done();
         })
     });
-    it("should Convert an invalid number such as 3/7.2/4kg: GET request to /api/convert",function(done){
+    test("should Convert an invalid number such as 3/7.2/4kg: GET request to /api/convert",function(done){
         chai.request(server).get("/api/convert?input=3/7.2/4kg")
         .end((err,res)=>{
             var should=require('chai').should();
@@ -35,7 +35,7 @@ suite('Functional Tests', function() {
             done();
         })
     })
-    it("should Convert an invalid number AND unit such as 3/7.2/4kilomegagram: GET request to /api/convert.",function(done){
+    test("should Convert an invalid number AND unit such as 3/7.2/4kilomegagram: GET request to /api/convert.",function(done){
         chai.request(server).get("/api/convert?input=3/7.2/4kilomegagram")
         .end((err,res)=>{
             var should=require('chai').should();
@@ -45,7 +45,7 @@ suite('Functional Tests', function() {
             done();
         })
     })
-    it("should Convert with no number such as kg: GET request to /api/convert",function(done){
+    test("should Convert with no number such as kg: GET request to /api/convert",function(done){
         chai.request(server).get("/api/convert?input=kg")
         .end((err,res)=>{
             var should=require('chai').should();
