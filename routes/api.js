@@ -13,7 +13,7 @@ module.exports = function (app) {
     let value=convertHandler.getNum(req.query.input);
     let result=convertHandler.convert(value,unit);
     if(typeof result==="number"){
-      result=result.toFixed(5);
+      result=parseFloat(result.toFixed(5));
     }
     if(typeof unit==="string"&&typeof value ==="number"){
       res.send({initNum:value,initUnit:unit,returnNum:result,returnUnit:convertHandler.getReturnUnit(unit),string:convertHandler.getString(value,convertHandler.spellOutUnit(unit),result,convertHandler.spellOutUnit(convertHandler.getReturnUnit(unit)))});
