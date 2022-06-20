@@ -1,27 +1,34 @@
 function ConvertHandler() {
   
   this.getNum = function(input) {
-    let result;
-    let indexOfLetter;
-    let indexOfLetterLast;
-    if(input.match(/[a-zA-Z]+/)){
-      result=input.replace(input.match(/[a-zA-Z]+/),"");
-    }
+    let result;   
+    let lettersReg=/[a-zA-Z]+/;
+    let numberReg=/^(\d+\.?\d*\/\d+\.?\d*(?!.))|^\d+$(?![\/\.])|^\d+\.\d*$/
 
-    if(input.match(/(\d+(?! *\/))? *-? *(?:(\d+) *\/ *(\d+))?.*$/)){
-    result=input.match(/(\d+(?! *\/))? *-? *(?:(\d+) *\/ *(\d+))?.*$/)[0];
-    if(result.includes("/")){
-      let segments=result.split("/");
-      if(segments.length>2){
-        return new Error("invalid number")
+    if(input.match(lettersReg)){
+      let match=input.match(lettersReg)[0];
+      result=input.replace(match,"");
+      }else{
+      result=input;
       }
-      result=segments[0]/segments[1]
-    }
-    return parseFloat(result);
-  }else{
-    return 1;
+    
+    if(result.match(numberReg)&&result!=""){
+      result=result.match(numberReg)[0];
+      if(result.includes("/")){
+        let segments=result.split("/");
+        if(segments.length>2){
+          return new Error("invalid number")
+        }
+        result=segments[0]/segments[1];
+        result=parseFloat(result.toFixed(5));
+      }
+      return parseFloat(result);
+      }else if(result===""){
+        return 1
+      }else{
+        return new Error("invalid number");
+      }
   }
-  };
   
   this.getUnit = function(input) {
     let result;
