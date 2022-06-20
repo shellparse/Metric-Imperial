@@ -32,9 +32,8 @@ function ConvertHandler() {
   
   this.getUnit = function(input) {
     let result;
-    if(input.match(/gal|L$|^L|mi$|km|lbs|kg/i))
-    {
-      result=input.match(/gal|L$|^L|mi$|km|lbs|kg/i)[0]
+    if(input.match(/gal|L$|^L|mi$|km|lbs|kg/i)){
+      result=input.match(/gal|L$|^L|mi$|km|lbs|kg/i)[0].toLowerCase();
       if(result==="l")return "L"
       return result;
     }else{
@@ -58,7 +57,7 @@ function ConvertHandler() {
         return "lbs";
     
       default:
-        return new Error("invalid unit")
+        return new Error("invalid init unit")
     }
   };
 
