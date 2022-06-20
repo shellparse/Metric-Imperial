@@ -1,6 +1,7 @@
 const chaiHttp = require('chai-http');
 const chai = require('chai');
 const server = require('../server');
+const { assert, AssertionError } = require('chai');
 chai.use(chaiHttp);
 
 
@@ -12,6 +13,7 @@ suite('Functional Tests', function() {
             var should = require('chai').should();
             should.not.exist(err);
             resObj.string.should.be.equal("10 liters converts to 2.64172 gallons");
+            assert.equal(resObj.string,"10 liters converts to 2.64172 gallons")
             done();
         })
     })
@@ -22,6 +24,7 @@ suite('Functional Tests', function() {
             var should=require('chai').should();
             should.not.exist(err);
             resObj.should.be.equal("invalid unit");
+            assert.equal(resObj,"invalid unit")
             done();
         })
     });
@@ -32,6 +35,7 @@ suite('Functional Tests', function() {
             should.not.exist(err);
             let resObj=res.text;
             resObj.should.be.equal("invalid number");
+            assert.equal(resObj,"invalid number");
             done();
         })
     })
@@ -42,6 +46,7 @@ suite('Functional Tests', function() {
             should.not.exist(err);
             let resObj=res.text;
             resObj.should.be.equal("invalid number and unit");
+            assert.equal(resObj,"invalid number and unit");
             done();
         })
     })
@@ -52,6 +57,7 @@ suite('Functional Tests', function() {
             should.not.exist(err);
             let resObj=JSON.parse(res.text);
             resObj.string.should.be.equal("1 kilograms converts to 2.20462 pounds");
+            assert.equal(resObj.string,"1 kilograms converts to 2.20462 pounds")
             done();
         })
     })
