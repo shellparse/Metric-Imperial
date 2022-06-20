@@ -18,10 +18,10 @@ suite('Functional Tests', function() {
     test("should convert an invalid unit and send invalid unit response",function(done){
         chai.request(server).get("/api/convert?input=32g")
         .end((err,res)=>{
-            let resObj=JSON.parse(res.text);
+            let resObj=res.text;
             var should=require('chai').should();
             should.not.exist(err);
-            resObj.string.should.be.equal("invalid unit");
+            resObj.should.be.equal("invalid unit");
             done();
         })
     });
@@ -30,8 +30,8 @@ suite('Functional Tests', function() {
         .end((err,res)=>{
             var should=require('chai').should();
             should.not.exist(err);
-            let resObj=JSON.parse(res.text);
-            resObj.string.should.be.equal("invalid number");
+            let resObj=res.text;
+            resObj.should.be.equal("invalid number");
             done();
         })
     })
@@ -40,8 +40,8 @@ suite('Functional Tests', function() {
         .end((err,res)=>{
             var should=require('chai').should();
             should.not.exist(err);
-            let resObj=JSON.parse(res.text);
-            resObj.string.should.be.equal("invalid number and unit");
+            let resObj=res.text;
+            resObj.should.be.equal("invalid number and unit");
             done();
         })
     })

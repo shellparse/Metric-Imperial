@@ -18,13 +18,13 @@ module.exports = function (app) {
     if(typeof unit==="string"&&typeof value ==="number"){
       res.send({initNum:value,initUnit:unit,returnNum:result,returnUnit:convertHandler.getReturnUnit(unit),string:convertHandler.getString(value,convertHandler.spellOutUnit(unit),result,convertHandler.spellOutUnit(convertHandler.getReturnUnit(unit)))});
     }else if(unit instanceof Error&&value instanceof Error){
-      res.send({string:"invalid number and unit"})
+      res.send("invalid number and unit")
     }else if(unit instanceof Error){
-      res.send({string:unit.message})
+      res.send(unit.message)
     }else if(value instanceof Error){
-      res.send({string:value.message})
+      res.send(value.message)
     }else{
-      res.send({string:"something went wrong check your inputs"})
+      res.send("something went wrong check your inputs")
     }
   })
 
